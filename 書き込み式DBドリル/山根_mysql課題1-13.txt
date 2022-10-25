@@ -1,0 +1,80 @@
+1-13
+1
+	SELECT #取得
+		name AS 氏名, #氏名
+		CASE
+			WHEN answer1 = 3 THEN 'ためになった' #評価が3の場合
+			WHEN answer1 = 2 THEN '普通'         #評価が2の場合
+			ELSE '役に立たない' #上記以外
+		END AS 評価, #評価
+		answer2 AS 感想 #感想
+	FROM
+		quest #アンケート回答テーブル
+	ORDER BY
+		answered DESC #回答日時が新しい
+	;
+
+
+2
+	SELECT #取得
+		isbn , #ISBNコード
+		COUNT(*) AS 貸し出し数,
+		CASE
+			WHEN COUNT(*) >= 10 THEN '好評' #10件以上の場合
+			WHEN COUNT(*) >= 5 THEN '普通'  #5件以上10件未満の場合
+			ELSE '不評' #5件未満
+		END AS 評価 #評価
+	FROM
+		rental #貸し出し記録テーブル
+	GROUP BY
+		isbn #ISBNコードでグループ化
+	;
+
+
+3
+	SELECT #取得
+		referer, #リンク元のURL
+		COUNT(*) AS アクセス数, #アクセス数
+		CASE
+			WHEN COUNT(*) >= 50 THEN 'A' #50件以上の場合
+			WHEN COUNT(*) >= 10 THEN 'B' #10件以上50件未満の場合
+			ELSE 'C' #10件未満の場合
+		END AS ランク #ランク
+	FROM
+		access_log #アクセス記録テーブル
+	GROUP BY
+		referer #リンク元のURLでグループ化
+	HAVING
+		COUNT(*) >= 3 #アクセス数が3件以上
+	ORDER BY
+		COUNT(*) DESC #アクセス数が多い順
+	;
+
+
+4
+	SELECT #取得
+		author_id AS 著者ID, #著者ID
+		COUNT(*) AS カウント数, #カウント数
+		CASE
+			WHEN COUNT(*) >= 4 THEN '多い' #4冊以上の場合
+			WHEN COUNT(*) >= 2 THEN '普通' #2冊以上4冊未満の場合
+			ELSE '少ない' #2冊未満の場合
+		END AS 評価 #評価
+	FROM
+		author_books #著者-書籍情報テーブル
+	GROUP BY
+		author_id #著者IDでグループ化
+	;
+
+
+5
+	SELECT #取得
+		CONCAR(l_name,f_name) #社員名(連結)
+		CASE
+			WHEN class IN ('部長','課長') THEN '管理職' #「WHEREではなくWHEN」
+			WHEN class IN ('主任','担当') THEN '総合職'
+			ELSE '一般職' #「THEN不要」
+		END AS 役職クラス #役職クラス
+	FROM
+		employee #社員テーブル
+	;

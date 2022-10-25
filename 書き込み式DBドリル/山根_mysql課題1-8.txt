@@ -1,0 +1,56 @@
+1-8
+1
+	SELECT #取得
+		title, #タイトル
+		publish_date #刊行日
+	FROM
+		books #本テーブル
+	ORDER BY
+		publish_date DESC #刊行日が新しい順
+	LIMIT
+		2,5 #3件目から5件分
+	;
+
+
+2
+	SELECT #取得
+		name, #名
+		answer1, #回答1
+		answer2 #回答2
+	FROM
+		quest #アンケート回答テーブル
+	ORDER BY
+		answered DESC #回答日時が新しい順
+	LIMIT
+		0,10 #先頭から10件分
+	;
+
+
+3
+	SELECT #取得
+		user_id, #ユーザーID
+		isbn, #ISBNコード
+		rental_date #貸出日
+	FROM
+		rental #貸し出し記録テーブル
+	WHERE
+		returned = 0 #(「0」貸し出し中で絞り込む)
+	ORDER BY
+		rental_date ASC #貸出日が古い順
+	LIMIT
+		0,5 #先頭から5件分
+	;
+	
+	
+4
+	SELECT #取得
+		page_id, #メニューコード
+		referer, #リンク元のURL
+		ip_address #IPアドレス
+	FROM
+		access_log #アクセス記録テーブル
+	ORDER BY
+		access_date DESC #「ASCではなくDESC」アクセス日時の新しい順
+	LIMIT
+		0,10 #「10,0ではなく0,10」先頭から10件分
+	;

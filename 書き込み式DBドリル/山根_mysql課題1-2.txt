@@ -1,0 +1,36 @@
+-2
+
+1
+	SELECT #取得
+    	title #タイトル
+    FROM
+    	books #本テーブル
+    ;
+    
+    
+2
+	SELECT #取得
+    	p_name, #商品名
+    	price #単価
+    FROM
+    	product #商品テーブル
+    ;
+    
+    
+3
+	SELECT #取得
+    	l_name, #社員の氏
+    	f_name, #社員の名
+    	class #役職
+    FROM
+    	employee #社員テーブル
+    ;
+    
+    
+4
+	SELECT #「SELECTSは誤字」
+    	title, #「，が抜けている」
+    	publish #出版社
+    FROM
+    	books #本テーブル
+    ;

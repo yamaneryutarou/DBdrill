@@ -1,0 +1,56 @@
+1-9
+1
+	SELECT #取得
+		sex, #性別
+		MAX(age), #年齢の最大
+		MIN(age) #年齢の最小
+	FROM
+		quest #アンケート回答テーブル
+	GROUP BY
+		sex #性別でグループ化
+	;
+	
+	
+2
+	SELECT #取得
+		prefecture, #出身地
+		sex, #性別
+		AVG(answer1) #回答1の平均
+	FROM
+		quest #アンケート回答テーブル
+	GROUP BY
+		prefecture,sex #出身地,性別でグループ化
+	;
+	
+	
+3
+	SELECT #取得
+		s_id, #店舗コード
+		SUM(s_value) #売上の平均
+	FROM
+		sales #月間売り上げテーブル
+	GROUP BY
+		s_id #店舗コードでグループ化
+	;
+	
+	
+4
+	SELECT #取得
+		publish, #出版社
+		MAX(price) #最大価格
+	FROM
+		books #本テーブル
+	GROUP BY
+		publish #出版社でグループ化
+	;
+
+
+5
+	SELECT #取得
+		page_id, #メニューコード
+		COUNT(*) #「SUMではなくCOUNT」ログIDの合計
+	FROM
+		access_log #アクセス記録テーブル
+	GROUP BY #「ORDERではなくGROUP」
+		page_id #メニューコードでグループ化
+	;

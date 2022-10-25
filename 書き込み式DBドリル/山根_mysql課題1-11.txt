@@ -1,0 +1,59 @@
+1-11
+1
+	SELECT #取得
+		prefecture, #出身地
+		ROUND(AVG(answer1)) AS 評価平均 #評価平均は四捨五入
+	FROM
+		quest #アンケート回答テーブル
+	GROUP BY
+		prefecture #出身地でグループ化
+	;
+	
+	
+2
+	SELECT #取得
+		isbn AS ISBNコード, #ISBNコード
+		DATE_FORMAT(rental_date,'%y/%m/%d') AS 貸出日 #貸出日YY/MM/DD方式
+	FROM
+		rental #貸し出し記録テーブル
+	WHERE
+		returned = 0 #(「0」貸し出し中で絞り込む)
+	ORDER BY
+		rental_date ASC #貸出日が古い順
+	;
+	
+	
+3
+	SELECT #取得
+		CONCAT(l_name,f_name) AS 利用者名, #利用者（氏名）
+		CONCAT(prefecture,city,o_address)AS 住所 #住所
+	FROM
+		usr #ユーザーテーブル
+	ORDER BY
+		user_id DESC #ユーザーID降順
+	;
+
+
+4
+	SELECT #取得
+		publish, #出版社
+		ROUND(AVG(price)) AS 価格平均 #価格平均は四捨五入 #刊行日
+	FROM
+		books #本テーブル
+	GROUP BY
+		publish #出版社でグループ化
+	;
+	
+	
+5
+	SELECT #取得
+		depart_id, #所属部署コード
+		class, #役職
+		CONCAT(l_name,f_name) AS 氏名 #「'で囲わない」氏名
+	FROM
+		employee #社員テーブル
+	ORDER BY
+		depart_id DESC,#「DESCが不足している」所属部署コードの降順
+		class DESC #役職の降順
+	;
+	
