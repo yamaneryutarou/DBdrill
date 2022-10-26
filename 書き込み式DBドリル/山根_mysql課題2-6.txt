@@ -1,0 +1,78 @@
+2-6
+1
+	SELECT #取得
+		q.name_kana #回答者名(カナ)
+	FROM
+		quest AS q #アンケート回答テーブル
+	WHERE
+		q.sex = '女' #性別が女性
+	UNION ALL
+	SELECT #取得
+		CONCAT(e.l_name_kana,e.f_name_kana) #氏名(カナ)
+	FROM
+		employee AS e #社員テーブル
+	WHERE
+		e.sex = 2 #性別が女性 
+	ORDER BY
+		1 ASC #昇順
+	;
+	
+	
+2
+	SELECT #取得
+		u.l_name #回答者名
+	FROM
+		usr AS u #ユーザテーブル
+	EXCEPT #差集合
+	SELECT #取得
+		q.name #回答者名
+	FROM
+		quest AS q #アンケート回答テーブル
+	;
+
+
+3
+	SELECT #取得
+		CONCAT(u.l_name_kana,u.f_name_kana) #氏名(カナ)
+	FROM
+		usr AS u #ユーザテーブル
+	WHERE
+		u.prefecture = '千葉県'
+	UNION #集合
+	SELECT #取得
+		q.name_kana #回答者名(カナ)
+	FROM
+		quest AS q #アンケート回答テーブル
+	WHERE
+		q.prefecture = '千葉県'
+	ORDER BY
+		1 DESC #昇順
+	;
+	
+	
+4
+	SELECT #取得
+		a.name_kana #氏名(カナ)
+	FROM
+		author AS a #著作テーブル
+	UNION #「ALL不要」集合
+	SELECT #取得
+		CONCAT(u.l_name_kana,u.f_name_kana) #「CONCATで1行にする」氏名(カナ)
+	FROM
+		usr AS u #ユーザテーブル
+	ORDER BY
+		1 DESC #降順
+	;
+
+
+5
+	SELECT #取得
+		CONCAT(u.l_name,u.f_name) #回答者名
+	FROM
+		usr AS u #ユーザテーブル
+	INTERSECT #積集合
+	SELECT #取得
+		q.name #回答者名
+	FROM
+		quest AS q #アンケート回答テーブル
+	;
