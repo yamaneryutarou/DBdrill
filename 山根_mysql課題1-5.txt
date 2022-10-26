@@ -1,0 +1,53 @@
+1-5
+1
+	SELECT #取得
+		* #全件
+	FROM
+		author #著者情報テーブル
+	WHERE
+		name LIKE '山田%' #山田で始まる著作の情報で絞る
+	;
+
+
+2
+	SELECT #取得
+		name #名
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		name NOT LIKE '_子' #子で終わらない人の情報で絞る
+	;
+	
+	
+3
+	SELECT #取得
+		isbn, #ISBNコード
+		title, #タイトル
+		price #価格
+	FROM
+		books #本テーブル
+	WHERE
+		title LIKE 'SQL__' #タイトルがSQL〇〇で始まる著作の情報で絞る
+	;
+	
+	
+4
+	SELECT #取得
+		l_name, #氏
+		f_name #名
+	FROM
+		employee #社員テーブル
+	WHERE
+		l_name_kana  LIKE 'ア%' #「ア」で始まる社員の情報で絞る
+	;
+	
+
+
+5
+	SELECT #取得
+		title #タイトル「,が不要」
+	FROM
+		books #本テーブル
+	WHERE
+		publish  LIKE '%社' #「_でなく%」
+	;
