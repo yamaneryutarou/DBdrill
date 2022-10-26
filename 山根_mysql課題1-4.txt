@@ -1,0 +1,92 @@
+1-4
+1
+	SELECT #取得
+		answer1, #回答1
+		answer2 #回答2
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		age >= 20 #20歳以上に絞る
+	;
+	
+	
+2
+	SELECT #取得
+		isbn, #ISBNコード
+		title, #タイトル
+		publish #出版社
+	FROM
+		books #本テーブル
+	WHERE
+		publish in ('日経BP','翔泳社') #(日経BP,翔泳社で絞り込む)
+	;
+
+
+3
+	SELECT #取得
+		l_name, #氏
+		f_name, #名
+		email #メールアドレス
+	FROM
+		usr #ユーザーテーブル
+	WHERE
+		prefecture NOT IN ('東京都') #(東京に住んでいない人で絞り込む)
+	;
+	
+	
+4
+	SELECT #取得
+		name, #名
+		sex, #性別
+		prefecture #出身
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		age BETWEEN 30 AND 39 #(30～40歳未満で絞り込む)
+	;
+
+
+5
+	SELECT #取得
+		name, #名
+		answer1, #回答1
+		answer2 #回答2
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		answered >= '2013-01-01' #(回答時間2013-01-01で絞り込む)
+	;
+
+
+
+6
+	SELECT #取得
+		user_id, #ユーザーID
+		isbn #ISBNコード
+	FROM
+		rental #貸し出し記録テーブル
+	WHERE
+		returned = 0 #(「0」貸し出し中で絞り込む)
+	;
+	
+	
+7
+	SELECT #取得
+		answer2 #回答2
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		answer2 IS NOT NULL #(感想欄が未定義でないで絞り込む)
+	;
+	
+	
+8
+	SELECT #取得
+		title, #タイトル「,が足りない」
+		publish, #出版社
+		price #価格
+	FROM
+		books #本テーブル
+	WHERE
+		price < 5000 #「=が不要」(5000円未満で絞り込む)
+	;
