@@ -1,0 +1,33 @@
+3-3
+1
+	INSERT INTO #データ挿入
+		time_card #タイムカードテーブル
+		(	s_id, #社員コード
+			r_date, #日付
+			work_time #勤務時間
+		)
+	SELECT
+		s_id, #社員コード,
+		CURRENT_DATE,
+		0
+	FROM
+		employee #社員テーブル
+	WHERE
+		class IN ('主任','担当','アシスタント')
+	;
+	
+	
+2
+	INSERT INTO #データ挿入
+		sales #月間売り上げテーブル
+		(	s_id, #社員コード
+			s_date, #売り上げ対象年月
+			s_value #売上高
+		)
+	SELECT
+		s_id, #店舗コード
+		DATE_FORMAT(CURRENT_DATE,'%Y-%m'), #今月の日付(YYYY-MM)
+		0 #売上高
+	FROM
+		shop #店舗テーブル
+	;
