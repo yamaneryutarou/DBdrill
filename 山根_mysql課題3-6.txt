@@ -1,0 +1,70 @@
+3-6
+1
+	UPDATE #更新
+		employee #社員テーブル
+	SET
+		depart_id = 'Z99' #所属部署コードをZ99に
+	WHERE
+		depart_id
+	NOT IN
+		(
+			SELECT
+				depart_id
+			FROM
+				depart #所属部署テーブル
+		)
+	;
+	
+	
+2
+	UPDATE #更新
+		employee #社員テーブル
+	SET
+		depart_id = 'Z99' #所属部署コードをZ99に
+	WHERE
+	NOT EXISTS
+		(
+			SELECT
+				*
+			FROM
+				depart #所属部署テーブル
+			WHERE
+				depart.depart_id = employee.depart_id
+		)
+	;
+	
+	
+3
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		title = #書名の後方に分類ID付加
+		CONCAT(title,
+			(
+			SELECT
+				category_name #分類名
+			FROM
+				category #書籍分類テーブル
+			WHERE
+				books.category_id = category.category_id #分類IDに絞る
+			)
+		)	
+	;
+
+
+4
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		category_id = 'XXXXX' #分類IDに[XXXXX]付加
+	WHERE
+		isbn IN
+		(
+			SELECT
+				isbn
+			FROM
+				rental #貸し出し記録テーブル
+			WHERE
+				returned = 9
+		)
+	;
