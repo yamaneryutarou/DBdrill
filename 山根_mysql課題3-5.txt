@@ -1,0 +1,54 @@
+3-5
+1
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		publish = 'WINGS出版' #WINGS出版に更新
+	WHERE
+		publish = '山田出版' #山田出版に絞る
+	;
+	
+	
+2
+	UPDATE #更新
+		employee #社員テーブル
+	SET
+		class = '主任', #役職
+		last_update = CURRENT_DATE #最終更新日
+	WHERE
+		CONCAT(l_name,f_name) = '山田奈美' #社員名が山田奈美
+	;
+
+
+3
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		price = price /1.10 #価格10%オフに更新
+	WHERE
+		publish = '日経BP' #日経BPに絞る
+	;
+
+
+4
+	UPDATE #更新
+		rental #貸し出し記録テーブル
+	SET
+		returned = 9 #返却かどうか 9:紛失
+	WHERE
+		rental_date < '2012-03-31' #貸出日2012年3月31日より前
+	AND
+		returned = 0 #返却かどうか 0:貸し出し中
+	;
+
+
+5
+	UPDATE #更新
+		rental #貸し出し記録テーブル
+	SET
+		rental_date = CURRENT_DATE #「=」が不足貸出日
+	WHERE
+		user_id = 'B200405' #利用者コード
+	AND #「ORではなくAND」
+		isbn = '4-0010-0000-1'
+	;
