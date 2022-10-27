@@ -1,0 +1,59 @@
+2-3
+1
+	SELECT #取得
+		cp.c_id AS 前のページ, #cp前のページ
+		cn.c_id AS 現在のページ #cn現在のページ
+	FROM
+		contents AS cp #前の書籍目次テーブル
+	INNER JOIN
+		contents AS cn #現在の書籍目次テーブル
+	ON
+		cp.next_id = cn.c_id
+	ORDER BY
+		cp.c_id ASC #現在のコンテンツコード 昇順
+	;
+	
+	
+2
+	SELECT #取得
+		mc.title AS メニュー名, #mc前のメニュー名
+		mn.title AS 親メニュー名 #mn現在のメニュー名
+	FROM
+		menu AS mc #前のメニューテーブル
+	INNER JOIN
+		menu AS mn #現在のメニューテーブル
+	ON
+		mc.parent = mn.page_id
+	ORDER BY
+		mc.page_id ASC
+	;
+	
+	
+3
+	SELECT #取得
+		CONCAT(eo.l_name,eo.f_name) AS 社員氏名, #1社員名
+		CONCAT(et.l_name,et.f_name) AS 上司氏名 #2上司名
+	FROM
+		employee AS eo #1の社員テーブル
+	LEFT JOIN
+		employee AS et #2の社員テーブル
+	ON
+		et.s_id = eo.b_id #社員コード
+	ORDER BY
+		eo.s_id ASC
+	;
+
+
+4
+	SELECT #取得
+		cp.c_id AS 前のページ, #cp前のページ
+		cn.c_id AS 現在のページ #cn現在のページ
+	FROM
+		contents AS cp #前の書籍目次テーブル
+	INNER JOIN #「OUTERではなくINNER」
+		contents AS cn #現在の書籍目次テーブル
+	ON
+		cp.next_id = cn.c_id #「<>ではなく=」
+	ORDER BY
+		cn.c_id ASC #現在のコンテンツコード 昇順
+	;
