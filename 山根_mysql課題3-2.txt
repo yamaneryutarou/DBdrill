@@ -1,0 +1,75 @@
+3-2
+1
+	INSERT INTO #データ挿入
+		quest #アンケート回答テーブル
+		(	name, #回答者名
+			name_kana, #回答者名(カナ)
+			sex, #性別
+			prefecture, #都道府県
+			answer1, #本書の評価
+			answer2, #本書の感想
+			answered #回答日時
+		)
+	VALUES
+		(
+			'佐々木三郎',
+			'ササキサブロウ',
+			'男',
+			'東京都',
+			3,
+			'興味深い内容です。',
+			NOW()
+		)
+	;
+	
+	
+2
+	INSERT INTO #データ挿入
+		rental #貸し出し記録テーブル
+		(	user_id, #利用者コード
+			isbn, #ISBNコード
+			rental_date #貸出日
+		)
+	VALUES
+		(
+			'B200502',
+			'4-0010-0000-0',
+			CURRENT_DATE
+		)
+	;
+	
+	
+3
+	INSERT INTO #データ挿入
+		author #著作情報テーブル
+		(	author_id, #著者ID
+			name, #著者名
+			name_kana, #著者名カナ
+			birth #生年月日
+		)
+	VALUES
+		(
+			'U0001',
+			'内田幸子',
+			'ウチダサチコ',
+			'1973-04-10'
+		)
+	;
+	
+	
+4
+	INSERT INTO #データ挿入
+		employee #「,が不足」社員テーブル
+		(	s_id, #社員コード
+			l_name, #社員名(氏)
+			depart_id, #所属部署コード
+			last_update #最終更新日
+		)
+	VALUES #「VALUEではなくVALUES」
+		(
+			'WA00001',
+			'和田',
+			'J01',
+			CURRENT_DATE
+		)
+	;
