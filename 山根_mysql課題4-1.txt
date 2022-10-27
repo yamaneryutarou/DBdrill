@@ -1,0 +1,63 @@
+4-1
+1
+	CREATE TABLE #テーブル作成
+		author #著作情報テーブル
+ 		(
+ 			author_id CHAR(5) PRIMARY KEY,
+ 			name VARCHAR(30),
+ 			name_kana VARCHAR(100) ,
+ 			birth DATE
+ 		)
+	;
+	
+	
+2
+	CREATE TABLE #テーブル作成
+		order_desc #注文明細テーブル
+		(
+			po_id INT NOT NULL,
+			p_id CHAR(10) NOT NULL,
+			quantity INT,
+			PRIMARY KEY (po_id,p_id)
+		)
+	;
+
+
+3
+	CREATE TABLE #テーブル作成
+		sales #月間売り上げテーブル
+		(
+			s_id CHAR(5) NOT NULL,
+			s_date CHAR(7) NOT NULL,
+			s_values INT,
+			PRIMARY KEY (s_id,s_date)
+		)
+	;
+	
+	
+4
+	CREATE TABLE #テーブル作成
+		books #書籍情報テーブル
+		(
+			isbn CHAR(17) NOT NULL PRIMARY KEY,
+			title VARCHAR(30),
+			price INT,
+			publish VARCHAR(30),
+			publish_date DATE,
+			category_id CHAR(5)
+		)
+	;
+	
+	
+5
+	CREATE TABLE #「INTOは外す」テーブル作成
+		rental #書籍情報テーブル
+		(
+			id INT AUTO_INCREMENT PRIMARY KEY, #「区切りが間違えている」
+			user_id CHAR(7),
+			isbn CHAR(13),
+			rental_date DATE,
+			returned SMALLINT DEFAULT 0
+		)
+	;
+
