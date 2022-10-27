@@ -1,0 +1,77 @@
+2-5
+1
+	SELECT #取得
+		answer1, #評価
+		answer2 #感想
+	FROM
+		quest #アンケート回答テーブル
+	WHERE
+		age >
+		(
+			SELECT
+				AVG(age) 
+			FROM 
+				quest
+		)
+	ORDER BY
+		answer1 ASC #評価低い順
+	;
+	
+	
+2
+	SELECT #取得
+		depart_id, #所属部署コード
+		depart_name #所属部署名
+	FROM
+		depart #所属部署テーブル
+	WHERE
+		NOT EXISTS
+		(
+		SELECT
+			*
+		FROM
+			employee #社員テーブル
+		WHERE
+			employee.depart_id = depart.depart_id
+		)
+	;
+	
+	
+3
+	SELECT #取得
+		sh.s_name, #店舗名
+		sa.s_value #売上高
+	FROM
+		sales AS sa #月間売り上げテーブル
+	INNER JOIN
+		shop AS sh #店舗テーブル
+	ON
+		sh.s_id = sa.s_id
+	WHERE
+		sa.s_value < (
+					SELECT
+						AVG(s_value) #副問い合わせ売上高平均
+					FROM
+						sales
+					WHERE
+						s_date = '2012-12' #2012年12月
+				  )
+	;
+		
+		
+4
+	SELECT #取得
+		CONCAT(l_name,f_name) AS ユーザ氏名 #ユーザ氏名
+	FROM
+		usr #ユーザテーブル
+	WHERE
+		NOT EXISTS
+		(
+		SELECT
+			user_id
+		FROM
+			rental #貸し出し記録テーブル
+		WHERE
+			rental.user_id = usr.user_id
+		)
+	;
