@@ -1,0 +1,73 @@
+2-2
+1
+	SELECT #取得
+		u.l_name, #氏
+		u.f_name, #名
+		COUNT(r.id) #貸し出し数
+	FROM
+	 	rental AS r #貸し出し記録テーブル
+	RIGHT JOIN
+		usr AS u #ユーザテーブル
+	ON
+		r.user_id = u.user_id #利用者コード
+	GROUP BY
+		u.l_name, #氏
+		u.f_name, #名
+		r.user_id #利用者コード
+	ORDER BY
+		COUNT(r.id) DESC #貸し出し数の多い順
+	;
+
+
+2
+	SELECT #取得
+		d.depart_id, #所属部署コード
+		d.depart_name #所属部署名
+	FROM
+		depart AS d #所属部署テーブル
+	LEFT JOIN
+		employee AS e #社員テーブル
+	ON
+		d.depart_id = e.depart_id #所属部署コード
+	WHERE
+		e.s_id IS NULL
+	;
+
+
+3
+	SELECT #取得
+		b.title, #書名
+		COUNT(r.isbn) #貸し出し数
+	FROM
+		rental AS r #貸し出し記録テーブル
+	RIGHT JOIN
+		books AS b #書籍情報テーブル
+	ON
+		r.isbn = b.isbn #ISBNコード
+	GROUP BY
+		b.isbn, #貸し出し数
+		b.title
+	HAVING
+		COUNT(r.isbn) > 0 #貸し出し数0より多い
+	ORDER BY
+		COUNT(r.isbn) DESC #貸し出し数の多い順
+	;
+	
+
+4
+	SELECT #取得
+		CONCAT(e.l_name,e.f_name), #社員氏名
+		AVG(t.work_time) #勤務平均時間
+	FROM
+		employee AS e #社員テーブル
+	LEFT JOIN
+		time_card AS t #タイムカードテーブル
+	ON
+		e.s_id = t.s_id #社員コード
+	GROUP BY
+		e.l_name, #氏
+		e.f_name, #名
+		t.s_id #社員コード
+	ORDER BY
+		AVG(t.work_time) DESC #勤務平均時間が多い順
+	;
