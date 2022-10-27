@@ -1,0 +1,63 @@
+3-8
+1
+	DELETE FROM #削除
+		employee #社員テーブル
+	WHERE
+		depart_id
+	NOT IN
+		(
+			SELECT
+				depart_id #所属部署コード
+			FROM
+				depart #所属部署テーブル
+		)
+	;
+	
+	
+2
+	DELETE FROM #削除
+		employee #社員テーブル
+	WHERE
+		NOT EXISTS
+		(
+			SELECT
+				depart.depart_id #所属部署コード
+			FROM
+				depart #所属部署テーブル
+			WHERE
+				employee.depart_id = depart.depart_id #所属部署コードで絞る
+		)
+	;
+
+
+3
+	DELETE FROM #削除
+		sales #月間売り上げテーブル
+	WHERE
+		NOT EXISTS
+		(
+			SELECT
+				s_name #店舗名
+			FROM
+				shop #店舗テーブル
+			WHERE
+				sales.s_id = shop.s_id #店舗コードで絞る
+		)
+	;
+		
+
+4		
+	DELETE FROM #削除
+		books #書籍情報テーブル
+	WHERE
+		isbn IN
+		(
+			SELECT
+				isbn #ISBNコード
+			FROM
+				rental #貸し出し記録テーブル
+			WHERE
+				returned = 9 #返却かどうか 9:紛失
+
+		)
+	;
