@@ -1,0 +1,39 @@
+3-7
+1
+	DELETE FROM #削除
+		rental #貸し出し記録テーブル
+	WHERE
+		rental_date <= '2011-12-31' #貸出日
+	AND
+		returned = '1' #返却かどうか1:返却済み
+	;
+	
+	
+2
+	DELETE FROM #削除
+		access_log #アクセス記録テーブル
+	WHERE
+		access_date < '2012-06-01' #アクセス日時が2012年6月1日より前
+	OR
+		referer IS NULL OR referer = '' #リンク元のURLが空
+	;
+	
+	
+3
+	DELETE FROM #削除
+		employee #社員テーブル
+	WHERE
+		last_update <= '2007-3-31' #最終更新日が2007年3月31日より前
+	AND
+		retired = '1'
+	;
+
+
+4
+	DELETE FROM #「FROMが不足」削除
+		books #書籍情報テーブル
+	WHERE
+		category_id = 'Z9999' #分類IDがZ9999
+	OR #(ANDではなくOR)
+		category_id IS NULL #分類IDが空
+	;
