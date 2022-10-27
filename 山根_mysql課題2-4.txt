@@ -1,0 +1,82 @@
+2-4
+1
+	SELECT #取得
+		d.depart_name AS 所属部署名, #所属部署名
+		CONCAT(e.l_name,e.f_name) AS 社員氏名, #社員氏名
+		t.work_time AS 勤務時間 #勤務時間
+	FROM
+		(
+			employee AS e #社員テーブル
+		INNER JOIN
+			depart AS d #所属部署テーブル
+		ON
+			e.depart_id = d.depart_id #所属部署コード
+		)
+	INNER JOIN
+		time_card AS t #タイムカードテーブル
+	ON
+		e.s_id = t.s_id  #社員コード
+	WHERE
+		e.s_id = 'DA00001'
+	AND
+		t.r_date BETWEEN '2012-01-01' AND '2012-12-31' #2012年
+	ORDER BY
+		t.r_date ASC #勤務時間日付の昇順
+	;
+	
+	
+2
+	SELECT #取得
+		cp.c_id AS 前コンテンツ名, #前コンテンツ名
+		cc.c_id AS 現コンテンツ名, #現コンテンツ名
+		cn.c_id AS 次コンテンツ名 #次コンテンツ名
+	FROM
+		(
+			contents AS cp #前書籍目次テーブル
+		INNER JOIN
+			contents AS cc #現書籍目次テーブル
+		ON
+			cp.next_id = cc.c_id
+		)
+	INNER JOIN
+			contents AS cn #次書籍目次テーブル
+		ON
+			cc.next_id = cn.c_id
+	ORDER BY
+		cc.c_id ASC #現在のコンテンツコード 昇順
+	;
+
+
+3
+	SELECT #取得
+		om.order_date AS 発注日, #発注日
+		om.po_id AS 注文番号,#注文番号
+		CONCAT(u.l_name,u.f_name) AS 利用者氏名, #利用者氏名
+		p.p_name AS 商品名, #商品名
+		p.price AS 商品単価, #商品単価
+		od.quantity AS 購入数 #購入数
+	FROM
+		(
+			(
+				order_main AS om #注文書テーブル
+			INNER JOIN
+				order_desc AS od #注文明細テーブル
+			ON
+				om.po_id = od.po_id
+			)
+		INNER JOIN
+			usr AS u #ユーザ
+		ON
+			om.user_id = u.user_id
+		)
+	INNER JOIN
+		product AS p #商品テーブル
+	ON
+		od.p_id = p.p_id
+	WHERE
+		om.delivery_date IS NULL #未納
+	ORDER BY
+		om.order_date ASC, #発注日昇順
+		om.po_id ASC, #注文番号昇順
+		od.p_id ASC #商品コード昇順
+	;
