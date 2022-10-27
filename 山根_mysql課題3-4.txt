@@ -1,0 +1,57 @@
+3-4
+1
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		isbn = CONCAT('ISBN',isbn), #ISBNコードの先頭に「ISBN」追加
+		price = price / 1.05 #税抜価格
+	;
+	
+	
+2
+	UPDATE #更新
+		usr #ユーザテーブル
+	SET
+		email = NULL #E-MailアドレスをNULLに
+	;
+	
+
+3
+	UPDATE #更新
+		product #商品テーブル
+	SET
+		price = price * 1.10 #10%値上げ価格
+	;
+	
+	
+4
+	UPDATE #更新
+		books #書籍情報テーブル
+	SET
+		isbn = REPLACE(isbn,'ISBN','') #ISBNコードの先頭の「ISBN」削除
+	;
+
+
+5
+	UPDATE #「INTOは不要」更新
+		quest #アンケートテーブル
+	SET #「VALUESではなくSET」
+		sex = REPLACE(sex,'姓','') #姓を削除
+	;
+	
+	
+6
+	UPDATE #更新
+		employee #社員テーブル
+	SET
+		class =
+		(
+		CASE
+			class
+				WHEN '部長' THEN 'リーダ' #部長の場合リーダ
+				WHEN '課長' THEN 'マネージャ' #課長の場合マネージャ
+			ELSE class #上記以外はそのまま
+		END
+		)
+	;
+	
