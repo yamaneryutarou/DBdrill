@@ -1,0 +1,46 @@
+4-2
+1
+	CREATE INDEX #インデックス作成
+		ind_rental #インデックス名
+	ON
+		rental #貸し出し記録テーブル
+		(
+			rental_date #貸出日
+		)
+	;
+	
+	
+2
+	CREATE INDEX #インデックス作成
+		ind_order_main #インデックス名
+	ON
+		order_main #注文書テーブル
+		(
+			order_date, #発注日
+			delivery_date #納品日
+		)
+	;
+
+
+3
+	CREATE INDEX #インデックス作成
+		ind_product #インデックス名
+	ON
+		product #商品テーブル
+		(
+			p_name #商品名
+		)
+	;
+
+4
+	CREATE INDEX #インデックス作成
+		ind_usr #インデックス名
+	ON #「INではなくON」
+		usr #ユーザテーブル
+		(
+			prefecture, #「,が不足」住所(都道府県名)
+			city, #住所(市町村名)
+			o_address #住所(その他)
+		)
+	;
+	
