@@ -1,0 +1,61 @@
+4-3
+1
+	ALTER TABLE #テーブル定義変更
+		books #書籍情報テーブル
+	ADD
+		pages INT DEFAULT 0,
+	ADD	
+		rating CHAR(1) DEFAULT 'B' NOT NULL
+	AFTER
+		category_id
+	;
+	
+	
+2
+	CREATE TABLE #テーブル作成
+		sales #月間売り上げテーブル
+		(
+			s_id CHAR(5) NOT NULL,
+			s_date CHAR(7) NOT NULL ,
+			s_value INT
+		)
+;
+	ALTER TABLE #テーブル定義変更
+		sales #月間売り上げテーブル
+	ADD
+		PRIMARY KEY(s_id)
+	;
+	
+	
+3
+	ALTER TABLE #テーブル定義変更
+		books #書籍情報テーブル
+	ADD
+		sales INT
+	AFTER
+		category_id
+	;
+
+
+4
+	ALTER TABLE #テーブル定義変更
+		usr #ユーザテーブル
+	ADD
+		sex VARCHAR(5) DEFAULT '男',
+	ADD
+		job VARCHAR(30)
+	AFTER
+		f_name_kana
+	;
+
+
+5
+	ALTER TABLE #テーブル定義変更
+		employee #社員テーブル
+	ADD #「TOは不必要」
+		email VARCHAR(255) NOT NULL,
+	ADD
+		job VARCHAR(30)
+	AFTER #「BEFOREではなくAFTER」
+		depart_id
+	;
