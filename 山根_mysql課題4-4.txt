@@ -1,0 +1,33 @@
+4-4
+1
+	ALTER TABLE #テーブル定義変更
+		books #書籍情報テーブル
+	MODIFY
+		publish VARCHAR(100) NOT NULL
+	;
+	
+	
+2
+	ALTER TABLE #テーブル定義変更
+		employee #社員テーブル
+	MODIFY
+		l_name VARCHAR(50) NOT NULL,
+	MODIFY
+		f_name VARCHAR(50) NOT NULL
+	;
+
+
+3
+	ALTER TABLE #テーブル定義変更
+		employee #社員テーブル
+	MODIFY
+		l_name VARCHAR(50) DEFAULT ''
+	;
+
+
+4
+	ALTER TABLE #テーブル定義変更
+		access_log #アクセス記録テーブル
+	MODIFY #「WITH不要」
+		referer VARCHAR(200) NULL #「,不要」
+	;
